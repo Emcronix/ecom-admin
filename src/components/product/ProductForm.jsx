@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { Button } from "@material-tailwind/react";
 import { BASE_URL } from "../../../config";
 import axios from "axios";
+import App from "../category/AddRow";
 
 const PurchaseModeCheckBox = ({ purchaseMode, isChecked, onChange }) => {
   return (
@@ -30,6 +31,7 @@ function ProductForm() {
     getValues,
     reset,
     control,
+    setValue,
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
@@ -71,16 +73,16 @@ function ProductForm() {
   // -------------------------------------------------
 
   const roomOptions = [
-    "Living Room",
-    "Bedroom",
-    "Dining Room",
-    "Bathroom",
-    "Balcony",
-    "Office Room",
-    "Guest Room",
-    "Pooja Room",
-    "Kids Room",
-    "Kitchen",
+    "Television",
+      "Air Conditioner",
+      "Refrigerator",
+      "Washing Machine",
+      "Smart Speaker",
+      "Laptop",
+      "Microwave",
+      "Printer",
+      "Tablet",
+      "Oven"
   ];
 
   // const categoryOptions = {
@@ -397,6 +399,7 @@ function ProductForm() {
   const handleUrgencyChange = (e) => {
     setSelectedUrgency(e.target.value);
   };
+  
 
   return (
     <form
@@ -465,6 +468,8 @@ function ProductForm() {
 
         formData.append("offer", selectedOffer.type);
         formData.append("urgency", selectedUrgency);
+        formData.append("technicalDetails",  JSON.stringify(data.technicalDetails))
+
 
         // Add images to FormData
         for (let i = 1; i <= 4; i++) {
@@ -494,6 +499,8 @@ function ProductForm() {
 
         formData.append("purchaseMode", selectedPurchaseMode);
         formData.append("productDescription", data.productDescription);
+        console.log(data);
+        
 
         coreValuesData.forEach((coreValue, index) => {
           formData.append(
@@ -1709,6 +1716,15 @@ function ProductForm() {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="block text-lg font-medium leading-5 text-gray-700 mt-10">
+            <div className="mb-4">Add Technical Details*</div>
+          {<App  fn={(details) => setValue("technicalDetails", details)}/>}
+          <input
+        type="hidden"
+        {...register("technicalDetails", { required: true })}
+      />
           </div>
 
           <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
