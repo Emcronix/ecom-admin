@@ -12,7 +12,7 @@ function CreateCategory() {
     { label: "No", value: "no" },
     { label: "Yes", value: "yes" },
   ];
-  const categoryType = ["Vlogging", "Electronics", "Videography", "Mobile Accessories", "Sports Fitness"];
+  const categoryType = ["Vlogging", "Electronics", "Camera", "Mobile Accessories", "Sports Fitness"];
   const { register, handleSubmit, getValues, reset, control } = useForm();
   const [colors, setColors] = useState([{ name: "", hexCode: "" }]);
   const [services, SetServices] = useState([{ name: "", cost: "", unitType : "" }]);
